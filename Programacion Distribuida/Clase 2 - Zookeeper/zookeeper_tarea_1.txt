@@ -1,0 +1,70 @@
+##################################################################################
+############################# Zookeeper - Cliente ################################
+##################################################################################
+
+# Levantar el Zookeeper
+cd /Desktop/cursos/
+./bin/start.sh zookeeper
+./zookeeper-3.4.10/bin/zkCli.sh
+
+# Ejercicios
+
+1)
+
+# Crear nodos persistentes
+create /utn my_data
+create /utn/master my_data
+create /utn/slaves my_data
+create /utn/tareas my_data
+create /utn/config my_data
+
+2)
+
+# Insertar un JSON en el nodo de configuración
+set /utn/config "{'usuario': 'dar12', 'password': 12345}"
+
+3)
+
+# Crear un nodo efimero
+create -e /utn/master/nodo_efimero "nodo_efimero"
+
+# Asignar watcher
+get /utn/master/nodo_efimero 1
+
+4)
+
+# efimero y secuencial znode
+create -e -s /utn/master/primer_nodo_efimero_secuencial "00001"
+create -e -s /utn/master/segundo_nodo_efimero_secuencial "00001"
+create -e -s /utn/master/tercer_nodo_efimero_secuencial "00001"
+
+5)
+
+# Verificar que reciba los cambios
+get /utn/master/nodo_efimero
+stat /utn/master/nodo_efimero
+
+6)
+
+# Matar cada uno de los slaves del master
+ls /utn/master 1
+delete /utn/master/primer_nodo_efimero_secuencial0000000002
+ls /utn/master 1
+delete /utn/master/segundo_nodo_efimero_secuencial0000000003
+ls /utn/master 1
+delete /utn/master/tercer_nodo_efimero_secuencial0000000004
+ls /utn/master 1
+delete /utn/master/nodo_efimero
+
+7)
+
+# Asignar watcher a /utn/tareas
+get /utn/tareas 1
+
+8)
+
+# crear nodos persistentes secuenciales
+create -s /utn/tareas/t- "primer nodo persistente secuencial"
+create -s /utn/tareas/t- "segundo nodo persistente secuencial"
+create -s /utn/tareas/t- "tercer nodo persistente secuencial"
+

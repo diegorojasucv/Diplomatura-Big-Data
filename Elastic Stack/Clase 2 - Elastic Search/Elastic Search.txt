@@ -1,0 +1,142 @@
+Querys
+
+1) 
+
+GET /log-generator-*/_search
+{
+  "query": {
+    "match": {
+      "responseText":"Ingreso"
+    }
+  }
+}
+
+2)
+
+GET /log-generator-*/_search
+{
+  "query": {
+    "multi_match": {
+      "query":"User",
+      "fields":["stacktrace","action"]
+    }
+  }
+}
+
+3)
+
+GET /log-generator-*/_search
+{
+  "query": {
+    "term": {
+      "action":{"value":"DELETE USER"}
+    }
+  }
+}
+
+4)
+
+GET /log-generator-*/_search
+{
+  "query": {
+    "terms": {
+      "action":["DELETE USER", "SEND MAIL"]
+    }
+  }
+}
+
+5) 
+
+GET /log-generator-*/_search
+{
+  "query": {
+    "wildcard": {
+      "user":{
+        "value": "*man",
+        "boost": 1.0
+      }
+    }
+  }
+}
+
+6)
+
+GET /log-generator-*/_search
+{
+  "query": {
+    "bool" : {
+      "must" : {
+        "term" : { "user" : "IronMan" }
+      },
+      "must_not" : {
+        "term" : { "logtype" : "LOGIN" }
+        }
+      },
+      "should" : [
+        {"range" : {
+          "duration" : { "gte" : 1, "lte" : 2 }
+      }},
+          { "term" : { "action" : "DELETE USER" } }],
+      "minimum_should_match" : 1,
+      "boost" : 1.0
+    }
+}
+
+7)
+
+GET /log-generator-*/_search
+{
+  "size": 0,
+  "aggs" : {
+    "interactions" : {
+      "adjacency_matrix" : {
+        "filters" : {
+          "grpA" : { "terms" : { "logtype" : ["JAVA_ERROR", "PERFORMANCE"]}},
+          "grpB" : { "terms" : { "logtype" : ["PERFORMANCE"]}},
+          "grpC" : { "terms" : { "logtype" : ["LOGIN"]}}
+        }
+      }
+    }
+  }
+}
+
+8)
+
+GET /log-generator-*/_search
+{
+  "size":0,
+  "aggs": {
+    "avg_grade": { "avg": { "field": "duration" } 
+    }
+  }
+} 
+
+
+9) 
+
+GET /log-generator-*/_search
+{
+  "size": 0,
+  "aggs": {
+    "result": {
+      "terms": {
+        "field": "level",
+        "size": 10
+      }
+    }
+  }
+}
+
+10)
+
+GET /log-generator-*/_search
+{
+  "size":0,
+  "aggs": {
+    "stats": { "stats": { "field": "duration" } 
+    }
+  }
+}
+
+
+

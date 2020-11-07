@@ -1,0 +1,113 @@
+#######################################
+################ TAREA 4 ##############
+#######################################
+
+#######################################
+############## SPARK DF ###############
+#######################################
+
+
+#######################################
+############## TITANIC ################
+#######################################
+
+# Ejercico 1
+
+# Importar las funciones
+from pyspark.sql.functions import *
+
+titanic_df = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("/user/tarea3/data/titanic.csv")
+
+# Ejercico 2
+df_max_fare_by_sex = titanic_df.groupby("Sex").max("Fare")
+df_max_fare_by_sex.show()
+
+# Ejercico 3
+df_min_fare_by_sex = titanic_df.groupby("Sex").min("Fare")
+df_min_fare_by_sex.show()
+
+# Ejercico 4
+df_count_by_sex_survived = titanic_df.groupby(["Sex", "Survived"]).count()
+df_count_by_sex_survived.show()
+
+# Ejercico 5
+
+#5-a)
+df_avg_fare_by_sex = titanic_df.groupby("Sex").avg("Fare")
+df_avg_fare_by_sex.show()
+
+#5-b)
+df_avg_fare_by_pclass = titanic_df.groupby("Pclass").avg("Fare")
+df_avg_fare_by_pclass.show()
+
+#######################################
+############## MOVIELENS ##############
+#######################################
+
+# Ejercico 1
+ratings_df = spark.read.format("csv").option("header", "true").option("inferSchema", "true").load("/user/tarea3/data/ratings.csv")
+ratings_df.show()
+
+# Ejercico 2
+df_avg_rating_by_id = ratings_df.groupby("userid").avg("rating")
+df_avg_rating_by_id.show()
+
+#df_avg_rating = ratings_df.select("rating").mean()
+#df_avg_rating.show()
+
+# Ejercico 3
+df_count_by_time = ratings_df.groupby("timestamp").count().sort("count", ascending = False)
+df_count_by_time.show()
+
+#######################################
+############## SPARK SQL ##############
+#######################################
+
+
+#######################################
+############## TITANIC ################
+#######################################
+
+# Ejercico 1
+
+titanic_df.createOrReplaceTempView("titanic")
+
+# Ejercico 2
+spark.sql("""select Sex, max(Fare) from titanic group by Sex""").show()
+
+# Ejercico 3
+spark.sql("""select Sex, min(Fare) from titanic group by Sex""").show()
+
+# Ejercico 4
+spark.sql("""select Sex,Survived, count(*) as num_casos from titanic group by Sex, Survived""").show()
+
+# Ejercico 5
+
+#5-a)
+spark.sql("""select Sex, avg(Fare) as avg_fare from titanic group by Sex""").show()
+
+#5-b)
+spark.sql("""select pclass, avg(Fare) as avg_fare from titanic group by pclass""").show()
+
+#######################################
+############## MOVIELENS ##############
+#######################################
+
+# Ejercico 1
+ratings_df.createOrReplaceTempView("ratings")
+
+# Ejercico 2
+spark.sql("""select userid, avg(rating) as avg_rating from ratings group by userid""").show()
+spark.sql("""select avg(rating) from ratings""").show()
+
+# Ejercico 3
+spark.sql("""select timestamp, count(*) as num_casos from ratings group by timestamp order by num_casos desc""").show()
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,6 @@
+# Ejecución de los comandos desde la consola
+
+cat titanic.csv | /usr/bin/python2.6 mapper_1.py | sort | /usr/bin/python2.6 reducer_1.py
+cat titanic.csv | /usr/bin/python2.6 mapper_2.py | sort | /usr/bin/python2.6 reducer_2.py
+cat titanic.csv | /usr/bin/python2.6 mapper_3.py | sort | /usr/bin/python2.6 reducer_3.py
+cat titanic.csv | /usr/bin/python2.6 mapper_4.py | sort | /usr/bin/python2.6 reducer_4.py

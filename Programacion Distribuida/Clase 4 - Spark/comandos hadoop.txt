@@ -1,0 +1,24 @@
+# Iniciar hadoop y yarn
+
+/home/hadoop/Desktop/curso/bin/start.sh hadoop
+/home/hadoop/Desktop/curso/bin/start.sh yarn
+
+# Iniciar pysaprk
+/home/hadoop/Desktop/curso/spark-2.2.0-bin-hadoop2.7/bin/pyspark
+
+# Crear un directorio en hadoop
+
+# Nos paramos en la siguiente ruta
+cd /home/hadoop/Desktop/curso/hadoop-2.8.1
+
+# Creamos el directorio
+./bin/hdfs dfs -mkdir /user/tarea3
+
+# Pasar archivos a hadoop
+./bin/hdfs dfs -put /home/hadoop/Documents/data /user/tarea3
+
+# Verificar lo que contiene la carpeta
+./bin/hdfs dfs -ls /user/tarea3/data
+
+# Ver lo que contiene un archivo
+./bin/hdfs dfs -cat /user/tarea3/data/ratings.csv

@@ -1,0 +1,54 @@
+# Diego Rojas
+
+
+1) Falso, porque los shards pueden contener información parcial de la totalidad del indice.
+
+2) Verdadero. 
+
+3) Verdadero. 
+
+4) Falso.
+
+5) Falso, porque todos los shards primarios deben de estar activos.
+
+6) Verdadero.
+
+7) Verdadero, porque al configurar dos nodos asegura que se pierda la comunicacion.
+
+8) Falso, debe pasarse a estado sin Hot Phase.
+
+9) Verdadero, porque declara las propiedades de los campos.
+
+10) Falso, porque para busquedas "full text" se debe utilizar Match Query.   
+
+11) Verdadero.   
+
+12) Verdadero.    
+
+13) Falso, para dashboard se debe usar la sección de vizualización.
+
+14) Verdadero.
+
+15) Verdadero.
+
+16) Falso, porque son independientes en su configuración.
+
+17) Verdadero.
+
+18) Verdadero.
+
+19) Verdadero.  
+
+20) Verdadero.  
+
+21) Falso.  
+
+22) Verdadero.
+
+23) Verdadero.  
+
+24) Verdadero.  
+
+25) Falso, porque Grok posee una mayor costo de procesamiento. 
+
+26) Verdadero.  

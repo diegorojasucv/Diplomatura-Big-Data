@@ -1,0 +1,28 @@
+##################################################################################
+############################# Zookeeper - Cliente ################################
+##################################################################################
+
+# Ejemplo de la clase
+
+# comandos
+help
+
+# ver los znode's disponibles
+ls /
+
+# Crear un znode
+create /zk_ejemplo data
+
+# Verificar el znode
+get /zk_ejemplo
+
+# Modificar el znode 
+set /zk_ejemplo data2
+
+# verificar los cambios
+get /zk_ejemplo
+
+# Eliminar un znode
+delete /zk_ejemplo
+
+

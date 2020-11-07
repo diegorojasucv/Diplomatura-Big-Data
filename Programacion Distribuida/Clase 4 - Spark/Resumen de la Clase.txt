@@ -1,0 +1,17 @@
+# Resumen de la clase Spark
+
+- rdd se ejecuta en memoria vs mapreduce debe escribir en disco.
+- driver program: coordina todas las ejecuciones.
+- worker node: donde se van a ejecutar los procesos.
+	- levanta ejecutores y realiza taks (e.g un mapeo)
+
+yarn: me permite realizar tareas en procesos batch.
+
+mesos: sirve para cuando se realizan queries de manera constante (tipo analytics)
+
+RDD:
+	-particiones
+	-tolerante a fallas
+	-inmutable
+	-lazy
+
