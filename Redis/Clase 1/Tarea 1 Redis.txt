@@ -1,0 +1,115 @@
+# Inicializar Redis
+
+redis-server
+redis-cli
+./redisinsight-linux64-1.7.1
+
+1.
+
+set usuarios:name'{"usuario1":"Julia","usuario2":"Pedro","usuario3":"Jorge"}'
+
+DR
+hset name user1 "Julia" user2 "Pedro" user3 "Jorge"
+hgetall name
+
+2. 
+
+RESPUESTA OPCION D
+
+DR
+RESPUESTA OPCION B y C
+
+3.
+
+hmset movie id 213 name "The Matrix" rating 8 country "USA"
+
+hmset id:213 name "The Matrix" rating 8 country "USA"
+
+hgetall movie #consultar
+
+hgetall id:213
+
+DR
+hset movie id 213 name "The Matrix" rating 8 country "USA"
+hkeys movie
+hvals movie
+
+4.
+
+lpush movie:comentario "muy buena pelicula"
+lpush movie:comentario "no me convencieron los efectos especiales"
+lpush movie:comentario "la segunda parte es mejor"
+
+lpush id:213:comentario "muy buena pelicula"
+lpush id:213:comentario "no me convencieron los efectos especiales"
+lpush id:213:comentario "la segunda parte es mejor"
+
+# para borra comentarios
+lpop movie:comentario
+
+5.
+
+lrange movie:comentario 0 1 #obtengo los dos primeros elementos de la ista
+
+lrange id:213:comentario 0 -1 #obtengo todos los elementos de la lista
+
+6.
+
+llen id:213:comentario
+
+7.
+
+sadd movie:correo aaa@gmail.com
+sadd movie:correo bbb@gmail.com
+sadd movie:correo ccc@gmail.com
+
+# consultar los elementos
+smembers movie:correo
+
+8.
+# Verificamos si un correo pertenece
+sismember movie:correo ccc@gmail.com
+ 
+9.
+#Defino set peliculas
+
+zadd peliculas 2000 "vengadores" 1990 "Roky" 1995 "otras"
+
+#Consulto elementos del set de forma acendente
+
+zrange peliculas 0 -1 withscores
+
+#Consulto elementos del set de forma decendente
+
+zrevrange peliculas 0 -1 withscores
+
+10.
+
+zrange peliculas 0 0 withscores
+
+11.
+
+zrange peliculas 0 1 withscores
+
+zrevrange peliculas 1 -1 withscores
+
+zpopmax peliculas
+
+#Para eliminar un elemento dentro de un set
+
+zrem peliculas "vengadores"
+
+14.
+
+add contrasena 123456789
+expire contrasena 86400
+
+15.
+
+exists contrasena
+del contrasena
+
+
+
+
+
